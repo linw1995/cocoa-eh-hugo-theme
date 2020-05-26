@@ -4,7 +4,6 @@
 {{ partial "head.html" . }}
 
 <body>
-
 {{ if (or (.Site.Params.small_banner_logo) (and (.IsPage) (not (.Site.Params.large_banner_logo)))) }}
 <div class="header column">
 {{ else }}
@@ -20,22 +19,14 @@
             <a href="/"><div class="name"><h1>{{ .Site.Title }}</h1></div></a>
             <nav>
                 <ul>
-                    {{ if (and (ne (len (where .Site.RegularPages "Section" "blog")) 0) (not (in .Site.Params.exclude_headings "blog"))) }}
-                            <li><a href="/blog/">Blog</a></li>
-                    {{ end }}
                     {{ range $.Site.Home.Sections }}
-                        {{ range first 1 (where .Pages "Section" "ne" "")}}
-                            {{ if (and (ne .Section "blog") (not (in .Site.Params.exclude_headings (lower .Section))))}}
-                            <li><a href="{{ .Section | urlize | relURL }}">{{ .Section }}</a></li>
-                            {{ end }}
-                        {{ end }}
+                        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
                     {{ end }}
                     {{ range where .Site.RegularPages "Section" ""}}
-                        {{ if (and (and (ne .Title "License") (ne .Title "Home")) (not (in .Site.Params.exclude_headings (lower .Title))))}}
-                            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-                        {{ end }}
+                        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
                     {{ end }}
                 </ul>
+                {{ partial "i18nlist.html" . }}
             </nav>
         </div>
     </div>
