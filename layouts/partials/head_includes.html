@@ -49,7 +49,7 @@
 {{ if .Site.Params.faviconfile }}
     href="{{ .Site.Params.faviconfile | relURL }}"
 {{ else }}
-    href="{{ .Site.BaseURL }}img/favicon.ico"
+    href="{{ .Site.BaseURL | relURL }}img/favicon.ico"
 {{ end }}
 >
 
